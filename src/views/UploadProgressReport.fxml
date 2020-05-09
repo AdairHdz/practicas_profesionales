@@ -56,7 +56,7 @@
          </font>
       </Label>
       <TextField fx:id="documentPathTextField" disable="true" editable="false" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-      <Button fx:id="chooseDocumentButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#buttonClicked" style="-fx-background-color: #1B2C63; -fx-text-fill: #FFF;" text="Elegir documento..." GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <Button fx:id="chooseDocumentButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chooseDocumentButtonClicked" style="-fx-background-color: #1B2C63; -fx-text-fill: #FFF;" text="Elegir documento..." GridPane.columnIndex="4" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -69,7 +69,7 @@
       <DatePicker fx:id="initialDateDatePicker" maxWidth="1.7976931348623157E308" promptText="Fecha de inicio" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <DatePicker fx:id="finalDateDatePicker" maxWidth="1.7976931348623157E308" promptText="Fecha de fin" GridPane.columnIndex="4" GridPane.rowIndex="4" />
       <TextField fx:id="hoursCoveredTextField" maxWidth="1.7976931348623157E308" promptText="Horas cubiertas" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-      <Button fx:id="uploadDocumentButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="379.0" style="-fx-background-color: #1BC623; -fx-text-fill: #FFF;" text="Subir documento" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6">
+      <Button fx:id="uploadDocumentButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#uploadDocumentButtonClicked" prefHeight="25.0" prefWidth="379.0" style="-fx-background-color: #1BC623; -fx-text-fill: #FFF;" text="Subir documento" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="10.0" />
          </GridPane.margin>
