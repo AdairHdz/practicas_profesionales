@@ -5,17 +5,36 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-    public static String databaseName = "inventario_productos";
-    public static String hostName = "localhost";
-    public static String port = "3306";
-    public static String username = "root";
-    public static String password = "";
-    public static String url = "jdbc:mariadb://" + hostName + ":" + port + "/" +  databaseName + "?user=" + username + "&password=" + password;
+        
+    protected String hostName;
+    protected String port;        
+    private String databaseName;
+    private String username;
+    private String password;
+    private static DatabaseConnector uniqueInstance;
     
-    public static Connection getConnection(){
-        Connection connection = null;
+    //public static String url = "jdbc:mariadb://" + hostName + ":" + port + "/" +  databaseName + "?user=" + username + "&password=" + password;
+    
+    private DatabaseConnector(){
+        this.hostName = "localhost";
+        this.port = "3306";
+        this.databaseName = "sistemapp";
+        this.username = "root";
+        this.password = "";
+    }
+    
+    public DatabaseConnector getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new DatabaseConnector();
+        }
+        return uniqueInstance;
+    }
+
+    
+    public Connection getConnection(){
+        Connection connection = null;        
         try{
-            connection = DriverManager.getConnection(url);
+            connection = DriverManager.getConnection("url");
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -28,5 +47,5 @@ public class DatabaseConnector {
         }catch(SQLException e){
             e.printStackTrace();
         }
-    }
+    }            
 }

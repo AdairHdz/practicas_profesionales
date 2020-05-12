@@ -10,20 +10,12 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author Adair Hernández
  */
-public class DateValidator {
-    
-    private Pattern validPattern;
-    
-    public DateValidator(){
-        
-    }
+public class DateValidator {    
     
     public boolean validateStartingAndEndingDate(LocalDate startingDate, LocalDate endingDate) throws ParseException{
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

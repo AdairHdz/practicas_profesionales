@@ -8,6 +8,7 @@ package controllers;
 import exceptions.NoFileChosenException;
 import inputvalidators.DateValidator;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,9 +55,12 @@ public class UploadProgressReportController extends DashboardController implemen
         try{
             FileChooserWindow fileChooser = new FileChooserWindow();
             File chosenFile = fileChooser.selectFile();
+            
             documentPathTextField.setText(chosenFile.getName());
         }catch(NoFileChosenException e){
             documentPathTextField.setText(e.getMessage());
+        }catch(IOException e2){
+            
         }
         
         
