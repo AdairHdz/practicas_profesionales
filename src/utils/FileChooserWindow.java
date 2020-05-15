@@ -38,18 +38,16 @@ public class FileChooserWindow {
         File selectedFile = this.fileChooser.showOpenDialog(null);
         DocxFileReader dfr = new DocxFileReader(selectedFile.getAbsolutePath());
 
-        DocxFileWriter dfw = new DocxFileWriter("myDirectory/myNewFile.docx");
+        DocxFileWriter dfw = new DocxFileWriter("myDirectory/" + selectedFile.getName() + ".docx");
         
         List<XWPFParagraph> paragraphs = dfr.getParagraphs();
-        
-        for (XWPFParagraph paragraph : paragraphs) {
-            System.out.println(paragraph.getText());
-        }
+
         dfw.writeParagraphs(paragraphs);
-        if (selectedFile != null) {
-            return selectedFile;
+        if (selectedFile == null) {
+            throw new NoFileChosenException("No file has been chosen");
+            
         }
-        throw new NoFileChosenException("No file has been chosen");
+        return selectedFile;
     }
 
 }

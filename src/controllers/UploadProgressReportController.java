@@ -6,7 +6,10 @@
 package controllers;
 
 import exceptions.NoFileChosenException;
+import file.DocxFileReader;
+import file.DocxFileWriter;
 import inputvalidators.DateValidator;
+import inputvalidators.NumberValidator;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -73,13 +76,8 @@ public class UploadProgressReportController extends DashboardController implemen
         LocalDate initialDate = initialDateDatePicker.getValue();
         LocalDate finalDate = finalDateDatePicker.getValue();
         
-        DateValidator dateValidator = new DateValidator();
-        if(dateValidator.validateStartingAndEndingDate(initialDate, finalDate)){
-            System.out.println("Datos válidos");
-        }else{
-            System.out.println("Datos inválidos");
-        }
-        
+        //DocxFileReader fr = new DocxFileReader(this.documentPathTextField.getText());
+        //System.out.println(this.documentPathTextField.getText());
         
     }
     
