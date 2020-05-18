@@ -52,12 +52,13 @@ create table estudiante(
 
 
 create table expediente(
-	idProyecto integer not null,
-	matricula varchar(10) not null,
+	idExpediente integer not null,
 	calificacionFinal float,
 	comentarios text,
 	totalHorasRealizadas integer,
-	PRIMARY KEY (idProyecto, matricula)
+	idProyecto integer not null,
+	matricula varchar(10) not null,
+	PRIMARY KEY (idExpediente)
 );
 
 
@@ -86,7 +87,7 @@ create table reporte(
 
 
 
-create table participa_estudiante_proyecto(
+create table participa(
 	matricula varchar(10) not null,
 	idProyecto integer not null,
 	fechaInicio date,
@@ -97,7 +98,7 @@ create table participa_estudiante_proyecto(
 
 
 
-create table eleccion_estudiante_proyecto(
+create table eleccion(
 	matricula varchar(10) not null,
 	idProyecto integer not null,
 	periodo varchar(35),
@@ -112,29 +113,37 @@ alter table estudiante add constraint
 fk_estudiante_1 FOREIGN KEY (idUsuario)
 REFERENCES usuario (idUsuario);
 
-alter table participa_estudiante_proyecto add constraint
-fk_participa_estudiante_proyecto_1 FOREIGN KEY (matricula)
+alter table participa add constraint
+fk_participa_1 FOREIGN KEY (matricula)
 REFERENCES estudiante (matricula);
 
-alter table participa_estudiante_proyecto add constraint
-fk_participa_estudiante_proyecto_2 FOREIGN KEY (idProyecto)
+alter table participa add constraint
+fk_participa_2 FOREIGN KEY (idProyecto)
 REFERENCES proyecto (idProyecto);
 
-alter table eleccion_estudiante_proyecto add constraint
-fk_eleccion_estudiante_proyecto_1 FOREIGN KEY (matricula)
+alter table eleccion add constraint
+fk_eleccion_1 FOREIGN KEY (matricula)
 REFERENCES estudiante (matricula);
 
-alter table eleccion_estudiante_proyecto add constraint
-fk_eleccion_estudiante_proyecto_2 FOREIGN KEY (idProyecto)
+alter table eleccion add constraint
+fk_eleccion_2 FOREIGN KEY (idProyecto)
 REFERENCES proyecto (idProyecto);
 
 alter table proyecto add constraint
 fk_proyecto_1 FOREIGN KEY (idOV)
 REFERENCES organizacion_vinculada (idOV);
 
+alter table expediente add constraint
+fk_expediente_1 FOREIGN KEY idProyecto
+REFERENCES participa (idProyecto);
+
+alter table expediente add constraint
+fk_expediente_2 FOREIGN KEY (matricula)
+REFERENCES participa (matricula);
+
 alter table documento add constraint
-fk_documento_1 FOREIGN KEY (idProyecto, matricula)
-REFERENCES expediente (idProyecto, matricula);
+fk_documento_1 FOREIGN KEY (idExpediente)
+REFERENCES expediente (idExpediente);
 
 
 
@@ -150,11 +159,11 @@ INSERT INTO Proyecto VALUES(NULL, "Proyecto 2", "Descripcion proyecto 2", "Activ
 INSERT INTO Proyecto VALUES(NULL, "Proyecto 3", "Descripcion proyecto 3", "Activo", CURDATE(), "Lunes a viernes de 8am a 3pm", "Metodologia proyecto 3", "actividades proyecto 3", "Objetivo general proy. 3", "Objetivos inmediatos proy. 3", "Objetivos mediatos proy. 3", 1, 0, 3);
 
 
-INSERT INTO eleccion_estudiante_proyecto VALUES("S18012122", 1, 1, CURDATE(), 1);
-INSERT INTO eleccion_estudiante_proyecto VALUES("S18012122", 2, 1, CURDATE(), 2);
-INSERT INTO eleccion_estudiante_proyecto VALUES("S18012122", 3, 1, CURDATE(), 3);
+INSERT INTO eleccion VALUES("S18012122", 1, 1, CURDATE(), 1);
+INSERT INTO eleccion VALUES("S18012122", 2, 1, CURDATE(), 2);
+INSERT INTO eleccion VALUES("S18012122", 3, 1, CURDATE(), 3);
 
-INSERT INTO participa_estudiante_proyecto VALUES("S18012122", 1, CURDATE(), CURDATE(), 1);
+INSERT INTO participa VALUES("S18012122", 1, CURDATE(), CURDATE(), 1);
 
 INSERT INTO Expediente VALUES(1, "S18012122", 10, "FIERRO PARIENTE", 480);
 
