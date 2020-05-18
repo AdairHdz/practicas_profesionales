@@ -16,7 +16,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  *
  * @author Adair Hernández
  */
-public class DocxFileReader {
+public class DocxFileReader implements FileReader{
     
     private String filePath;
     

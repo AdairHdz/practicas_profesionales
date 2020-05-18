@@ -22,19 +22,12 @@ public class DatabaseConnector {
         this.username = "root";
         this.password = "";
     }
-    
-    public DatabaseConnector getInstance(){
-        if(uniqueInstance == null){
-            uniqueInstance = new DatabaseConnector();
-        }
-        return uniqueInstance;
-    }
 
     
-    public Connection getConnection(){
+    public static Connection getConnection(){
         Connection connection = null;        
         try{
-            connection = DriverManager.getConnection("url");
+            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistemapp?user=root&password=");
         }catch(SQLException e){
             e.printStackTrace();
         }

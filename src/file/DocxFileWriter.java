@@ -17,7 +17,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
  *
  * @author Adair Hernández
  */
-public class DocxFileWriter {
+public class DocxFileWriter implements FileWriter{
     
     private String filePath;
     private FileOutputStream fileOutputStream;

@@ -8,14 +8,10 @@ package utils;
 import exceptions.NoFileChosenException;
 import file.DocxFileReader;
 import file.DocxFileWriter;
-import java.io.BufferedWriter;
+
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.List;
-import java.util.Scanner;
 import javafx.stage.FileChooser;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
@@ -36,13 +32,13 @@ public class FileChooserWindow {
     public File selectFile() throws NoFileChosenException, IOException {
 
         File selectedFile = this.fileChooser.showOpenDialog(null);
-        DocxFileReader dfr = new DocxFileReader(selectedFile.getAbsolutePath());
+        //DocxFileReader dfr = new DocxFileReader(selectedFile.getAbsolutePath());
 
-        DocxFileWriter dfw = new DocxFileWriter("myDirectory/" + selectedFile.getName() + ".docx");
+        //DocxFileWriter dfw = new DocxFileWriter("myDirectory/" + selectedFile.getName() + ".docx");
         
-        List<XWPFParagraph> paragraphs = dfr.getParagraphs();
+        //List<XWPFParagraph> paragraphs = dfr.getParagraphs();
 
-        dfw.writeParagraphs(paragraphs);
+        //dfw.writeParagraphs(paragraphs);
         if (selectedFile == null) {
             throw new NoFileChosenException("No file has been chosen");
             

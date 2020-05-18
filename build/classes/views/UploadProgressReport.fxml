@@ -76,8 +76,8 @@
       </Button>
       <TableView fx:id="uploadedDocumentsTableView" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7">
         <columns>
-          <TableColumn maxWidth="1.7976931348623157E308" prefWidth="232.0" text="Nombre" />
-          <TableColumn maxWidth="1.7976931348623157E308" prefWidth="143.0" text="Fecha de subida" />
+          <TableColumn fx:id="nameTableColumn" maxWidth="1.7976931348623157E308" prefWidth="232.0" text="Nombre" />
+          <TableColumn fx:id="uploadDateTableColumn" maxWidth="1.7976931348623157E308" prefWidth="143.0" text="Fecha de subida" />
         </columns>
       </TableView>
    </children>

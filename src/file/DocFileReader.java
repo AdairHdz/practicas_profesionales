@@ -18,7 +18,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  *
  * @author Adair Hernández
  */
-public class DocFileReader {
+public class DocFileReader implements FileReader{
     
     private String filePath;
     
@@ -45,4 +45,14 @@ public class DocFileReader {
               System.out.println(paragraph);
             }
         }
+
+    @Override
+    public void read() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<XWPFParagraph> getParagraphs() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
