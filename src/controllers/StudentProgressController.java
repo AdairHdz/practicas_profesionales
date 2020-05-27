@@ -7,21 +7,42 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 
-/**
- * FXML Controller class
- *
- * @author Adair Hernández
- */
+
 public class StudentProgressController extends DashboardController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML
+    private Label studentName;
+    @FXML
+    private Label studentEnrollment;
+    @FXML
+    private Label nameLinkedOrganization;
+    @FXML
+    private Label defaultTagContact;
+    @FXML
+    private Label studentEmail;
+    @FXML
+    private Label studentPhone;
+    @FXML
+    private Label projectName;
+    @FXML
+    private ProgressBar studentProgress;
+    @FXML
+    private ProgressIndicator studentProgressIndicator;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
-    
+    public void getData(){
+        
+    }
+    public void calculateProgress(){
+        
+    }
 }
