@@ -27,6 +27,7 @@ public class FileChooserWindow {
         this.fileChooser = new FileChooser();
         this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Word document (docx)", "*.docx"));
         this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Word document (doc)", "*.doc"));
+        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.PDF"));
     }
 
     public File selectFile() throws NoFileChosenException, IOException {
@@ -40,8 +41,7 @@ public class FileChooserWindow {
 
         //dfw.writeParagraphs(paragraphs);
         if (selectedFile == null) {
-            throw new NoFileChosenException("No file has been chosen");
-            
+            throw new NoFileChosenException("No file has been chosen");            
         }
         return selectedFile;
     }

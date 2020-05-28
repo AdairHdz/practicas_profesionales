@@ -77,6 +77,7 @@ public class UploadProgressReportController extends DashboardController implemen
         try {
             FileChooserWindow fileChooser = new FileChooserWindow();
             this.chosenFile = fileChooser.selectFile();
+            
             FileReader fileReader = new DocxFileReader(this.chosenFile.getPath());
             FileWriter fileWriter = new DocxFileWriter("myDirectory/" + this.chosenFile.getName());
             fileWriter.writeParagraphs(fileReader.getParagraphs());
@@ -91,8 +92,7 @@ public class UploadProgressReportController extends DashboardController implemen
     }
 
     public void uploadDocumentButtonClicked() throws ParseException {
-
-        //String initialDate = initialDateDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        
         LocalDate initialDate = initialDateDatePicker.getValue();
         LocalDate finalDate = finalDateDatePicker.getValue();
         DateValidator dateValidator = new DateValidator();
