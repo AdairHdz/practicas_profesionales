@@ -31,6 +31,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Report;
+import pojo.DocumentPojo;
 import pojo.ReportPojo;
 import utils.FileChooserWindow;
 
@@ -62,7 +63,7 @@ public class UploadProgressReportController extends DashboardController implemen
     @FXML
     private TableColumn<ReportPojo, Date> uploadDateTableColumn;
 
-    private File chosenFile;
+    private DocumentPojo chosenFile;
 
     /**
      * Initializes the controller class.

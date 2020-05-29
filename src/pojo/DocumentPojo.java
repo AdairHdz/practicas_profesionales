@@ -5,6 +5,7 @@
  */
 package pojo;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -12,10 +13,24 @@ import java.util.Date;
  * @author Adair Hernández
  */
 public class DocumentPojo {
+    
     private String name;
     private String path;
     private double size;
     private Date uploadDate;
+    
+    private File file;
+    
+    public DocumentPojo(){
+        
+    }
+    
+    public DocumentPojo(File file){
+        this.file = file;
+        this.name = this.file.getName();
+        this.path = this.file.getPath();
+        this.size = this.file.length();
+    }
 
     public String getName() {
         return name;

@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import pojo.DocumentPojo;
 
 /**
  *
@@ -39,12 +40,13 @@ public class FileChooserWindow {
         this.extensionFilters.addAll(docxExtension, docExtension, pdfExtension);
     }
 
-    public File selectFile() throws NoFileChosenException, IOException {
+    public DocumentPojo selectFile() throws NoFileChosenException, IOException {
         File selectedFile = this.fileChooser.showOpenDialog(null);
+        DocumentPojo document = new DocumentPojo(selectedFile);
         if (selectedFile == null) {
             throw new NoFileChosenException("No file has been chosen");            
         }
-        return selectedFile;
+        return document;
     }
 
 }
