@@ -6,17 +6,11 @@
 package controllers;
 
 import exceptions.NoFileChosenException;
-import file.DocxFileReader;
-import file.DocxFileWriter;
-import file.FileReader;
-import file.FileWriter;
-import inputvalidators.DateValidator;
-import inputvalidators.NumberValidator;
-import java.io.File;
+import file.DocumentWriter;
+import file.DocxWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -54,16 +48,14 @@ public class UploadProgressReportController extends DashboardController implemen
     private TextField hoursCoveredTextField;
     @FXML
     private Button uploadDocumentButton;
-
     @FXML
     private TableView<ReportPojo> uploadedDocumentsTableView;
-
     @FXML
     private TableColumn<ReportPojo, String> nameTableColumn;
     @FXML
     private TableColumn<ReportPojo, Date> uploadDateTableColumn;
 
-    private DocumentPojo chosenFile;
+    private DocumentPojo chosenDocument;
 
     /**
      * Initializes the controller class.
@@ -76,38 +68,24 @@ public class UploadProgressReportController extends DashboardController implemen
 
     public void chooseDocumentButtonClicked() {
         try {
-            FileChooserWindow fileChooser = new FileChooserWindow();
-            this.chosenFile = fileChooser.selectFile();
-            
-            FileReader fileReader = new DocxFileReader(this.chosenFile.getPath());
-            FileWriter fileWriter = new DocxFileWriter("myDirectory/" + this.chosenFile.getName());
-            fileWriter.writeParagraphs(fileReader.getParagraphs());
-            documentPathTextField.setText(this.chosenFile.getName());
-
+            this.handleChooseDocumentButtonClicked();
         } catch (NoFileChosenException e) {
-            documentPathTextField.setText(e.getMessage());
+            documentPathTextField.setText("");
         } catch (IOException e2) {
 
         }
-
     }
 
-    public void uploadDocumentButtonClicked() throws ParseException {
-        
-        LocalDate initialDate = initialDateDatePicker.getValue();
-        LocalDate finalDate = finalDateDatePicker.getValue();
-        DateValidator dateValidator = new DateValidator();
-        boolean validDates = dateValidator.validateStartingAndEndingDate(initialDate, finalDate);
-        NumberValidator numberValidator = new NumberValidator();
-        boolean validHoursFormat = numberValidator.isValid(hoursCoveredTextField.getText());
-        if(validDates && validHoursFormat){
-            ReportPojo report = new ReportPojo();
-            report.setName(this.chosenFile.getName());
-            
-        }
-        //DocxFileReader fr = new DocxFileReader(this.documentPathTextField.getText());
-        //System.out.println(this.documentPathTextField.getText());
+    private void handleChooseDocumentButtonClicked() throws NoFileChosenException, IOException {
+        FileChooserWindow fileChooser = new FileChooserWindow();
+        this.chosenDocument = fileChooser.selectFile();
+        documentPathTextField.setText(this.chosenDocument.getName());
     }
+
+    public void uploadDocumentButtonClicked(){
+        DocumentWriter docxWriter = new DocxWriter(this.chosenDocument);
+    }
+    
 
     private void initTable() {
         initCols();

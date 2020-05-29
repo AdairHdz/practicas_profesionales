@@ -6,8 +6,6 @@
 package utils;
 
 import exceptions.NoFileChosenException;
-import file.DocxFileReader;
-import file.DocxFileWriter;
 
 import java.io.File;
 import java.io.IOException;
