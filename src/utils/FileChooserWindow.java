@@ -12,7 +12,9 @@ import file.DocxFileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 /**
@@ -22,24 +24,23 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 public class FileChooserWindow {
 
     private FileChooser fileChooser;
+    private ObservableList<ExtensionFilter> extensionFilters;
 
     public FileChooserWindow() {
         this.fileChooser = new FileChooser();
-        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Word document (docx)", "*.docx"));
-        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Word document (doc)", "*.doc"));
-        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.PDF"));
+        this.extensionFilters = this.fileChooser.getExtensionFilters();
+        this.initializeValidExtensions();
+    }
+    
+    private void initializeValidExtensions(){
+        ExtensionFilter docxExtension = new FileChooser.ExtensionFilter("Word document (docx)", "*.docx");
+        ExtensionFilter docExtension = new FileChooser.ExtensionFilter("Word document (doc)", "*.doc");
+        ExtensionFilter pdfExtension = new FileChooser.ExtensionFilter("PDF", "*.PDF");        
+        this.extensionFilters.addAll(docxExtension, docExtension, pdfExtension);
     }
 
     public File selectFile() throws NoFileChosenException, IOException {
-
         File selectedFile = this.fileChooser.showOpenDialog(null);
-        //DocxFileReader dfr = new DocxFileReader(selectedFile.getAbsolutePath());
-
-        //DocxFileWriter dfw = new DocxFileWriter("myDirectory/" + selectedFile.getName() + ".docx");
-        
-        //List<XWPFParagraph> paragraphs = dfr.getParagraphs();
-
-        //dfw.writeParagraphs(paragraphs);
         if (selectedFile == null) {
             throw new NoFileChosenException("No file has been chosen");            
         }

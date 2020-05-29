@@ -7,8 +7,7 @@ package practicas_profesionales;
 
 
 import exceptions.NoFileChosenException;
-import fileborrar.DocxFileWriter;
-import fileborrar.FileWriter;
+
 import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
@@ -39,10 +38,8 @@ public class Practicas_profesionales extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NoFileChosenException, IOException {
-        FileChooserWindow fcw = new FileChooserWindow();
-        File userFile = fcw.selectFile();
-        File newFile = new File("myDirectory/" + userFile.getName());
-        FileWriter fw = new DocxFileWriter(newFile);
+
+
         //Y si le pasas a FileWriter el archivo del usuario, y que dentro lo lea y escriba el contenido en uno nuevo?
         launch(args);
     }
