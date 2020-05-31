@@ -27,6 +27,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import models.Report;
 import pojo.DocumentPojo;
 import pojo.ReportPojo;
+import pojo.UserPojo;
+import session.UserSession;
 import utils.FileChooserWindow;
 
 /**

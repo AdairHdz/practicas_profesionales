@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pojo.DocumentPojo;
 import pojo.ReportPojo;
+import session.UserSession;
 
 /**
  *
@@ -36,6 +37,7 @@ public class Practicas_profesionales extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NoFileChosenException, IOException {
+        
         launch(args);
     }
     

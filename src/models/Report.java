@@ -18,9 +18,7 @@ import pojo.ReportPojo;
  *
  * @author Adair Hernández
  */
-public class Report {
-
-    private String hola;
+public class Report {    
 
     public Report() {
 
