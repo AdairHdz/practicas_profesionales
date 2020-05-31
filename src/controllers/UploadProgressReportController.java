@@ -82,8 +82,9 @@ public class UploadProgressReportController extends DashboardController implemen
         documentPathTextField.setText(this.chosenDocument.getName());
     }
 
-    public void uploadDocumentButtonClicked(){
+    public void uploadDocumentButtonClicked(){        
         DocumentWriter docxWriter = new DocxWriter(this.chosenDocument);
+        docxWriter.write();
     }
     
 

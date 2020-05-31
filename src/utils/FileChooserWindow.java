@@ -40,7 +40,10 @@ public class FileChooserWindow {
 
     public DocumentPojo selectFile() throws NoFileChosenException, IOException {
         File selectedFile = this.fileChooser.showOpenDialog(null);
-        DocumentPojo document = new DocumentPojo(selectedFile);
+        DocumentPojo document = new DocumentPojo();
+        document.setName(selectedFile.getName());
+        document.setPath(selectedFile.getPath());
+        document.setSize(selectedFile.length());
         if (selectedFile == null) {
             throw new NoFileChosenException("No file has been chosen");            
         }

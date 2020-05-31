@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/fileborrar/DocxWriterFacade.java</file>
+            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/utils/FileChooserWindow.java</file>
             <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/pojo/DocumentPojo.java</file>
-            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/fileborrar/FileWriter.java</file>
-            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/fileborrar/DocxFileWriter.java</file>
+            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/pojo/ReportPojo.java</file>
+            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/models/Report.java</file>
             <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/practicas_profesionales/Practicas_profesionales.java</file>
-            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/file/DocxFileWriter.java</file>
             <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/controllers/UploadProgressReportController.java</file>
+            <file>file:/C:/Users/Adair%20Hernández/Desktop/Cuarto%20semestre/Principios%20de%20construcción%20de%20software/practicas_profesionales/src/file/DocumentWriter.java</file>
         </group>
     </open-files>
 </project-private>

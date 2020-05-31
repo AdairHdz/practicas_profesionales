@@ -12,5 +12,5 @@ import pojo.DocumentPojo;
  * @author Adair Hernández
  */
 public interface DocumentWriter {
-    public boolean write(DocumentPojo document);
+    public boolean write();
 }

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import pojo.ReportPojo;
 
 /**
@@ -54,9 +55,16 @@ public class Report {
     }
 
     public boolean saveReport(ReportPojo report) {
+        String fileName = report.getName();
+        String filePath = report.getPath();
+        double fileSize = report.getSize();
+        Date initialDateOfReport = report.getInitialDate();
+        Date endingDateOfReport = report.getEndingDate();
+        int coveredHours = report.getCoveredHours();
         Connection connection = DatabaseConnector.getConnection();
         try {
             Statement query = connection.createStatement();
+            //boolean inserted = query.execute("INSERT INTO Reporte VALUES(NULL, );");
         } catch (SQLException e) {
 
         }

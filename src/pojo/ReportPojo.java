@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Adair Hernández
  */
-public class ReportPojo extends DocumentPojo{
+public class ReportPojo extends DocumentPojo {
     private String comments;    
     private Date initialDate;
     private Date endingDate;
