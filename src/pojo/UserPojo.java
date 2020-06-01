@@ -15,8 +15,6 @@ public class UserPojo {
     private String email;
     private String password;
 
-    
-    
     public String getName() {
         return name;
     }
