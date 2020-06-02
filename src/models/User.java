@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import pojo.CoordinatorPojo;
+import pojo.ProfessorPojo;
+import pojo.StudentPojo;
 import pojo.UserPojo;
 
 /**
@@ -24,14 +27,15 @@ public class User {
         try{
             Statement query = connection.createStatement();
             ResultSet resultSet = query.executeQuery("SELECT nombres, apellidos,"
-                    + " correo, contrasenia FROM Usuario"
+                    + " correo, contrasenia, tipo FROM Usuario"
                     + " WHERE correo = '" + email
                     + "' AND contrasenia = '" + password + "'");
             while(resultSet.next()){
                 user.setName(resultSet.getString("nombres"));
                 user.setLastName(resultSet.getString("apellidos"));
                 user.setEmail(resultSet.getString("correo"));
-                user.setPassword(resultSet.getString("contrasenia"));            
+                user.setPassword(resultSet.getString("contrasenia"));  
+                user.setType(resultSet.getString("tipo"));
             }
             
         }catch(SQLException e){
