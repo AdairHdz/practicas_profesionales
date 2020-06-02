@@ -26,21 +26,20 @@ public class User {
         UserPojo user = new UserPojo();
         try{
             Statement query = connection.createStatement();
-            ResultSet resultSet = query.executeQuery("SELECT nombres, apellidos,"
-                    + " correo, contrasenia, tipo FROM Usuario"
-                    + " WHERE correo = '" + email
-                    + "' AND contrasenia = '" + password + "'");
+            ResultSet resultSet = query.executeQuery("SELECT idUsuario, nombres, apellidos, correo, tipo"
+                    + " FROM Usuario WHERE correo = '" + email
+                    + "' AND contrasenia = '" + password + "';");
             while(resultSet.next()){
+                user.setUserId(resultSet.getInt("idUsuario"));
                 user.setName(resultSet.getString("nombres"));
                 user.setLastName(resultSet.getString("apellidos"));
                 user.setEmail(resultSet.getString("correo"));
-                user.setPassword(resultSet.getString("contrasenia"));  
                 user.setType(resultSet.getString("tipo"));
             }
             
         }catch(SQLException e){
             
-        }
+        }        
         return user;
     }
     

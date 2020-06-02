@@ -18,14 +18,18 @@ import pojo.RecordPojo;
  */
 public class Record {
     
-    public RecordPojo getRecord(String enrollment){
+    public RecordPojo getRecord(int userId){
         Connection connection = DatabaseConnector.getConnection();
         RecordPojo record = null;
         try{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT calificacionFinal,"
                     + "comentarios, totalHorasRealizadas "
-                    + "FROM Expediente WHERE matricula = '" + enrollment + "';");
+                    + "FROM Expediente "
+                    + "INNER JOIN Participacion ON Expediente.idParticipacion = Participacion.idParticipacion "
+                    + "INNER JOIN Estudiante ON Participacion.matricula = Estudiante.matricula "
+                    + "INNER JOIN Usuario ON Usuario.idUsuario = Estudiante.idUsuario "
+                    + "WHERE Usuario.idUsuario = " + userId);
             while(resultSet.next()){
                 record = new RecordPojo();
                 record.setFinalGrade(resultSet.getFloat("calificacionFinal"));

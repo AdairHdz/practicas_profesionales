@@ -45,28 +45,18 @@ public class LoginController implements Initializable {
         User user = new User();
 
         UserPojo myUser = user.getUser(email, password);
-        //UserPojo userLoggedIn = null;
-        System.out.println(myUser.getType());
-        if(myUser.getType().equals("estudiante")){
-            StudentPojo sp = new StudentPojo();
-            sp.setName(myUser.getName());
-            sp.setLastName(myUser.getLastName());
-            
-            System.out.println(sp.getEnrollment() + ", " + sp.getName());
-            
-            
-        }else if(myUser.getType() == "profesor"){
-            
-        }else{
-            
-        }
+
+        
+        
         UserSession userSession = UserSession.getInstance();
+        
         userSession.login(myUser);
         
         try{
             redirectToUploadProgressReportScreen();
         }catch(IOException e){
             System.out.println("Checking for session details...");
+            e.printStackTrace();
         }
     }
 

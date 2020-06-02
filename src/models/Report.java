@@ -24,15 +24,18 @@ public class Report {
 
     }
 
-    public ArrayList<ReportPojo> getReports(String enrollment) {
+    public ArrayList<ReportPojo> getReports(int userId) {
         try {
             Connection connection = DatabaseConnector.getConnection();
             Statement query = connection.createStatement();
             ResultSet result = query.executeQuery("SELECT Documento.nombre, Documento.fechaSubida, "
                     + "Reporte.fechaInicio, Reporte.fechaFin, Reporte.horasCubiertas, Reporte.status "
-                    + "FROM Reporte INNER JOIN Documento ON Documento.idDocumento = Reporte.idDocumento "
-                    + "INNER JOIN Expediente ON Expediente.idProyecto = Documento.idProyecto "
-                    + "INNER JOIN Estudiante ON Estudiante.matricula = Expediente.matricula WHERE Estudiante.matricula = '" + enrollment + "';");
+                    + "FROM Usuario INNER JOIN Estudiante ON Usuario.idUsuario = Estudiante.idUsuario "
+                    + "INNER JOIN Participacion ON Estudiante.matricula = Participacion.matricula "
+                    + "INNER JOIN Expediente ON Participacion.idParticipacion = Expediente.idParticipacion "
+                    + "INNER JOIN Documento ON Expediente.idExpediente = Documento.idExpediente "
+                    + "INNER JOIN Reporte ON Documento.idDocumento = Reporte.idDocumento "
+                    + "WHERE Usuario.idUsuario = " + userId);
             DatabaseConnector.closeConnection(connection);
             ArrayList<ReportPojo> reports = new ArrayList<>();
             while (result.next()) {
@@ -51,6 +54,8 @@ public class Report {
             return null;
         }
     }
+    
+    
 
     public boolean saveReport(ReportPojo report) {
         String fileName = report.getName();

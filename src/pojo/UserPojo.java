@@ -10,12 +10,21 @@ package pojo;
  * @author Adair Hernández
  */
 public class UserPojo {
+    protected int userId;
     protected String name;
     protected String lastName;
     protected String email;
     protected String password;
     protected String type;
     
+    
+    public int getUserId(){
+        return this.userId;
+    }
+    
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
     
     public String getName() {
         return name;
@@ -56,6 +65,8 @@ public class UserPojo {
     public void setType(String type){
         this.type = type;
     }
+    
+    
     
     
 }
