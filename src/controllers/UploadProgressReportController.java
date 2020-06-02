@@ -20,12 +20,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.Record;
 import models.Report;
 import pojo.DocumentPojo;
+import pojo.RecordPojo;
 import pojo.ReportPojo;
 import pojo.UserPojo;
 import session.UserSession;
@@ -56,7 +59,10 @@ public class UploadProgressReportController extends DashboardController implemen
     private TableColumn<ReportPojo, String> nameTableColumn;
     @FXML
     private TableColumn<ReportPojo, Date> uploadDateTableColumn;
-
+    @FXML
+    private ProgressBar studentProgressBar;
+    
+    
     private DocumentPojo chosenDocument;
 
     /**
@@ -66,6 +72,8 @@ public class UploadProgressReportController extends DashboardController implemen
     public void initialize(URL url, ResourceBundle rb) {
         initTable();
         loadData();
+        int progress = this.getProgress();
+        this.setProgressToProgressBar(progress);
     }
 
     public void chooseDocumentButtonClicked() {
@@ -105,6 +113,18 @@ public class UploadProgressReportController extends DashboardController implemen
         ArrayList<ReportPojo> reports = report.getReports("S18012122");
         ObservableList<ReportPojo> reportsObservableList = FXCollections.observableArrayList(reports);
         return reportsObservableList;
+    }
+    
+    private int getProgress(){
+        UserSession userSession = UserSession.getInstance();
+        
+        Record record = new Record();
+        RecordPojo recordPojo = record.getRecord("S18012122");
+        return recordPojo.getTotalHoursCovered();
+    }
+    
+    private void setProgressToProgressBar(int hoursCovered){
+        this.studentProgressBar.setProgress((hoursCovered * 100) / 480);
     }
 
 }
