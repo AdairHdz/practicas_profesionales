@@ -13,5 +13,9 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  * @author Adair Hernández
  */
 public interface DocumentReader {
+    /**
+     * 
+     * @return Los párrafos del documento a leer
+     */
     public List<XWPFParagraph> getParagraphs();
 }
