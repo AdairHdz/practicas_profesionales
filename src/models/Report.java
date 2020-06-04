@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+
+
 import pojo.ReportPojo;
 
 /**
@@ -57,20 +59,39 @@ public class Report {
     
     
 
-    public boolean saveReport(ReportPojo report) {
+    public boolean saveReport(ReportPojo report) throws SQLException {
+        
+        //Documento
         String fileName = report.getName();
-        String filePath = report.getPath();
         double fileSize = report.getSize();
-        Date initialDateOfReport = report.getInitialDate();
-        Date endingDateOfReport = report.getEndingDate();
+        String filePath = report.getPath();
+        int recordId = 1;
+        
+        //Reporte
+        String fileStatus = report.getStatus();
+        java.sql.Date sqlInitialDateOfReport = new java.sql.Date(report.getInitialDate().getTime());
+        java.sql.Date sqlEndingDateOfReport = new java.sql.Date(report.getEndingDate().getTime());
         int coveredHours = report.getCoveredHours();
+        
+        
+        
         Connection connection = DatabaseConnector.getConnection();
         try {
-            Statement query = connection.createStatement();
-            //boolean inserted = query.execute("INSERT INTO Reporte VALUES(NULL, );");
+            connection.setAutoCommit(false);
+            Statement documentInsertionQuery = connection.createStatement();
+            boolean documentInserted = documentInsertionQuery.execute("INSERT INTO Documento VALUES(NULL, '"
+                    + fileName + "', " + fileSize + ", '" + filePath + "', CURDATE(), " + recordId + ");");
+            Statement reportInsertionQuery = connection.createStatement();
+            boolean reportInserted = reportInsertionQuery.execute("INSERT INTO "
+                    + "Reporte VALUES(LAST_INSERT_ID(), "
+                    + "'" + fileStatus + "', '" + sqlInitialDateOfReport + "'" + ", '" + sqlEndingDateOfReport + "', " + coveredHours + ");");
+            connection.commit();
         } catch (SQLException e) {
-
+            System.out.println(e.getMessage());
+            connection.rollback();
+        }finally{
+            connection.close();
         }
-        return false;
+        return true;
     }
 }

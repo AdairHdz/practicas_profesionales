@@ -10,6 +10,10 @@ import file.DocumentWriter;
 import file.DocxWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -20,12 +24,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import models.Record;
 import models.Report;
 import pojo.DocumentPojo;
@@ -60,30 +62,29 @@ public class UploadProgressReportController extends DashboardController implemen
     private TableColumn<ReportPojo, String> nameTableColumn;
     @FXML
     private TableColumn<ReportPojo, Date> uploadDateTableColumn;
-    
+
     TableColumn deleteReportColumn;
-    
+
     @FXML
     private ProgressBar studentProgressBar;
-    
-    
+
     private DocumentPojo chosenDocument;
 
     private UserPojo user;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         UserSession userSession = UserSession.getInstance();
-        user = userSession.getUser();        
+        user = userSession.getUser();
         initTable();
         loadData();
 
         int progress = this.getProgress();
         this.setProgressToProgressBar(progress);
-        
+
     }
 
     public void chooseDocumentButtonClicked() {
@@ -102,11 +103,39 @@ public class UploadProgressReportController extends DashboardController implemen
         documentPathTextField.setText(this.chosenDocument.getName());
     }
 
-    public void uploadDocumentButtonClicked(){        
+    public void uploadDocumentButtonClicked() {
         DocumentWriter docxWriter = new DocxWriter(this.chosenDocument);
-        docxWriter.write();
+        boolean fileHasBeenWritten = docxWriter.write();
+        boolean fileHasBeenSaved = false;
+        Report report = new Report();
+        ReportPojo reportToBeUploaded = new ReportPojo();
+        reportToBeUploaded.setName(this.chosenDocument.getName());
+        reportToBeUploaded.setPath(this.chosenDocument.getPath());
+        reportToBeUploaded.setSize(this.chosenDocument.getSize());
+        //reportToBeUploaded.setUploadDate(this.chosenDocument.getUploadDate());
+        int hoursCovered = Integer.parseInt(this.hoursCoveredTextField.getText());
+        reportToBeUploaded.setCoveredHours(hoursCovered);
+        reportToBeUploaded.setStatus("Aprobado");
+
+        //DatePicker to Date
+        LocalDate initialDateLocalDate = initialDateDatePicker.getValue();
+        Instant initialDateInstant = Instant.from(initialDateLocalDate.atStartOfDay(ZoneId.systemDefault()));
+        Date initialDate = Date.from(initialDateInstant);
+        
+        
+        LocalDate finalDateLocalDate = finalDateDatePicker.getValue();
+        Instant finalDateInstant = Instant.from(finalDateLocalDate.atStartOfDay(ZoneId.systemDefault()));
+        Date finalDate = Date.from(finalDateInstant);
+        
+        reportToBeUploaded.setInitialDate(initialDate);
+        reportToBeUploaded.setEndingDate(finalDate);
+
+        try {
+            fileHasBeenSaved = report.saveReport(reportToBeUploaded);
+        } catch (SQLException ex) {
+
+        }
     }
-    
 
     private void initTable() {
         initCols();
@@ -117,28 +146,23 @@ public class UploadProgressReportController extends DashboardController implemen
         nameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         uploadDateTableColumn.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
 
-        
-        
     }
 
     public ObservableList<ReportPojo> loadData() {
         Report report = new Report();
-        
+
         ArrayList<ReportPojo> reports = report.getReports(user.getUserId());
         ObservableList<ReportPojo> reportsObservableList = FXCollections.observableArrayList(reports);
         return reportsObservableList;
     }
-    
-    private int getProgress(){
-        //UserSession userSession = UserSession.getInstance();
-        
-        
+
+    private int getProgress() {
         Record record = new Record();
         RecordPojo recordPojo = record.getRecord(user.getUserId());
         return recordPojo.getTotalHoursCovered();
     }
-    
-    private void setProgressToProgressBar(int hoursCovered){
+
+    private void setProgressToProgressBar(int hoursCovered) {
         this.studentProgressBar.setProgress((hoursCovered * 100) / 480);
     }
 
