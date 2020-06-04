@@ -27,7 +27,7 @@ public class DatabaseConnector {
     public static Connection getConnection(){
         Connection connection = null;        
         try{
-            connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistemapp?user=root&password=");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/sistemapp?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT-6", "root", "30dpr4319n");
         }catch(SQLException e){
             e.printStackTrace();
         }

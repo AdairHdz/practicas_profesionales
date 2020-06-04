@@ -53,45 +53,45 @@
             </Button>
          </children>
       </VBox>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="293.0" text="Adair Hernández Viveros" GridPane.columnIndex="2" GridPane.columnSpan="3">
+      <Label fx:id="studentName" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="293.0" text="Adair Hernández Viveros" GridPane.columnIndex="2" GridPane.columnSpan="3">
          <font>
             <Font name="Leelawadee UI Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Sxxxxxxxx" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2">
+      <Label fx:id="studentEnrollment" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Sxxxxxxxx" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2">
          <font>
             <Font name="Leelawadee UI Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="73.0" prefWidth="232.0" text="Sistema de control de inventarios" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.rowSpan="2">
+      <Label fx:id="projectName" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="73.0" prefWidth="232.0" text="Sistema de control de inventarios" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <font>
             <Font name="Leelawadee UI Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Contacto:" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Label fx:id="defaultTagContact" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Contacto:" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <font>
             <Font name="Leelawadee UI Bold" size="20.0" />
          </font>
       </Label>
-      <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="adair_morato_viveros@gmail.com" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <Label fx:id="studentEmail" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="adair_morato_viveros@gmail.com" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <font>
             <Font name="Leelawadee UI Bold" size="15.0" />
          </font>
       </Label>
-      <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="2287549119" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+      <Label fx:id="studentPhone" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="2287549119" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <font>
             <Font name="Leelawadee UI Bold" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Café Moretto" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+      <Label fx:id="nameLinkedOrganization" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="187.0" text="Café Moretto" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <font>
             <Font name="Leelawadee UI Bold" size="15.0" />
          </font>
       </Label>
-      <ProgressBar prefHeight="35.0" prefWidth="235.0" progress="0.57" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="6" GridPane.rowSpan="2" />
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="3">
+      <ProgressBar fx:id="studentProgress" prefHeight="35.0" prefWidth="235.0" progress="0.57" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="6" GridPane.rowSpan="2" />
+      <TableView fx:id="reportsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="3">
         <columns>
-          <TableColumn prefWidth="499.0000305175781" text="Nombre de reporte" />
+          <TableColumn fx:id="reportsName" prefWidth="499.0000305175781" text="Nombre de reporte" />
         </columns>
       </TableView>
    </children>
