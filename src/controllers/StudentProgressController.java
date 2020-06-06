@@ -63,7 +63,7 @@ public class StudentProgressController extends DashboardController implements In
        participationPojo = participation.getParticipation("S18012122");
         
        this.projectName.setText(participationPojo.getProject().getName());
-       this.studentName.setText(participationPojo.getStudent().getName());
+       this.studentName.setText(participationPojo.getStudent().getName() + " " + participationPojo.getStudent().getLastName());
        this.studentEnrollment.setText(participationPojo.getStudent().getEnrollment());
        this.studentEmail.setText(participationPojo.getStudent().getEmail());
        this.studentPhone.setText(participationPojo.getStudent().getPhone());
