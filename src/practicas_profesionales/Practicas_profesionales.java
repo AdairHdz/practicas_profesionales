@@ -26,7 +26,7 @@ public class Practicas_profesionales extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/ProjectOverview.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
         
         Scene scene = new Scene(root);
         

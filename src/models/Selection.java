@@ -7,9 +7,12 @@ package models;
 
 import database.DatabaseConnector;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import pojo.LinkedOrganizationPojo;
+import pojo.ProjectPojo;
 import pojo.SelectionPojo;
 
 /**
@@ -18,6 +21,42 @@ import pojo.SelectionPojo;
  */
 public class Selection {
 
+    public ArrayList<SelectionPojo> getStudentSelections(int userId){
+        Connection connection = DatabaseConnector.getConnection();
+        ArrayList<SelectionPojo> studentSelections = new ArrayList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet resultSet = st.executeQuery("SELECT Eleccion.nivelEleccion,"
+                    + " Proyecto.nombre, Organizacion_vinculada.nombre AS nombreOV,"
+                    + " Proyecto.numeroEstudiantesSolicitados,"
+                    + " Proyecto.numeroEstudiantesAsignados"
+                    + " FROM Eleccion INNER JOIN Proyecto ON"
+                    + " Proyecto.idProyecto = Eleccion.idProyecto"
+                    + " INNER JOIN Organizacion_vinculada ON Organizacion_vinculada.idOv = Proyecto.idOV"
+                    + " INNER JOIN Estudiante ON"
+                    + " Estudiante.matricula = Eleccion.matricula"
+                    + " INNER JOIN Usuario ON Estudiante.idUsuario = Usuario.idUsuario"
+                    + " WHERE Usuario.idUsuario = " + userId);
+            while(resultSet.next()){
+                SelectionPojo selection = new SelectionPojo();
+                LinkedOrganizationPojo lop = new LinkedOrganizationPojo();
+                ProjectPojo project = new ProjectPojo();
+                lop.setName(resultSet.getString("nombreOV"));
+                project.setName(resultSet.getString("nombre"));
+                project.setRequiredStudents(resultSet.getInt("numeroEstudiantesSolicitados"));
+                project.setAssignStudents(resultSet.getInt("numeroEstudiantesAsignados"));
+                selection.setPosition(resultSet.getInt("nivelEleccion"));
+                project.setLinkedOrganization(lop);
+                selection.setProject(project);
+                
+                studentSelections.add(selection);
+            }
+        }catch(SQLException e){
+            System.out.println("ERROR SELECTION");
+        }
+        return studentSelections;
+    }
+    
     public void saveSelections(ArrayList<SelectionPojo> selections) {
         Connection connection = DatabaseConnector.getConnection();
         
