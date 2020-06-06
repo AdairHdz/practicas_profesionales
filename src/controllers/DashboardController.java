@@ -24,6 +24,7 @@ public class DashboardController implements Initializable{
 
     @FXML protected Button goToUploadProgressReportButton;
     @FXML protected Button goToStudentProgressButton;
+    @FXML protected Button goToSelectStudentButton;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,6 +42,11 @@ public class DashboardController implements Initializable{
         System.out.println("Adiós");
         Parent root = FXMLLoader.load(getClass().getResource("/views/StudentProgress.fxml"));
         Stage stage = (Stage) goToStudentProgressButton.getScene().getWindow();
+        stage.setScene(new Scene(root, 768, 510));
+    }
+        public void goToSelectStudent() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/views/SelectStudent.fxml"));
+        Stage stage = (Stage) goToSelectStudentButton.getScene().getWindow();
         stage.setScene(new Scene(root, 768, 510));
     }
     

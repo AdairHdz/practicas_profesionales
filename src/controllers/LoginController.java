@@ -49,6 +49,7 @@ public class LoginController implements Initializable {
 
         try {
             if(myUser.getType().equals("estudiante")){
+                System.out.println("HOLAAA");
                 redirectToUploadProgressReportScreen();
             }else{
                 redirectToAssignProjectScreen();

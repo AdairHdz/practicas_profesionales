@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,6 +28,7 @@ public class ProjectPojo {
     
     private LinkedOrganizationPojo linkedOrganization;
 
+
     public String getName() {
         return name;
     }
@@ -35,6 +37,7 @@ public class ProjectPojo {
         this.name = name;
     }
 
+
     public Date getDate() {
         return date;
     }
@@ -42,6 +45,7 @@ public class ProjectPojo {
     public void setDate(Date date) {
         this.date = date;
     }
+
 
     public String getActivities() {
         return activities;
@@ -58,6 +62,7 @@ public class ProjectPojo {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public String getSchedule() {
         return schedule;
@@ -134,3 +139,4 @@ public class ProjectPojo {
     
     
 }
+

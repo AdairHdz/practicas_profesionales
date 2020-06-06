@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,12 +14,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import pojo.StudentPojo;
 
-/**
- *
- * @author Adair Hernández
- */
-public class Student {
-    public ArrayList<StudentPojo> getStudents(){
+
+public class Student {    
+    
+    public Student(){
+        
+    }
+    
+        public ArrayList<StudentPojo> getStudents(){
         Connection connection = DatabaseConnector.getConnection();
         ArrayList<StudentPojo> studentsList = new ArrayList<>();
         try{
@@ -39,4 +42,33 @@ public class Student {
         }                
         return studentsList;
     }
+    
+    public StudentPojo getOnlyOneStudent(String enrollment){
+         try{
+            Connection conn =  DatabaseConnector.getConnection();
+            Statement query = conn.createStatement();
+            ResultSet result = query.executeQuery("SELECT usuario.nombres, usuario.apellidos, usuario.correo, "
+                    + "usuario.contasenia, estudiante.matricula, estudiante.telefono "
+                    + "FROM usuario inner join estudiante on usuario.idUsuario = estudiante.idUsuario "
+                    + "WHERE estudiante.matricula = '"+enrollment+"';");
+            DatabaseConnector.closeConnection(conn);
+            StudentPojo student = new StudentPojo();
+            while(result.next()){
+
+                student.setName(result.getString("nombres"));
+                student.setLastName(result.getString("apellidos"));
+                student.setEmail(result.getString("correo"));
+                student.setPassword(result.getString("contasenia"));
+                student.setEnrollment(result.getString("matricula"));
+                student.setPhone(result.getString("telefono"));
+            }
+            return student;
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }   
+    }
 }
+
+

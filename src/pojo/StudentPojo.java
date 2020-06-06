@@ -1,22 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pojo;
 
-/**
- *
- * @author Adair Hernández
- */
+
 public class StudentPojo extends UserPojo{
     private String enrollment;
-
-    public void setEnrollment(String enrollment){
-        this.enrollment = enrollment;
+    private String phone;
+    
+    public StudentPojo(){
+        
     }
     
-    public String getEnrollment(){
-        return this.enrollment;
+
+    public String getEnrollment() {
+        return enrollment;
+    }
+
+    public void setEnrollment(String studentEnrollment) {
+        this.enrollment = studentEnrollment;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String studentPhone) {
+        this.phone = studentPhone;
     }
 }
