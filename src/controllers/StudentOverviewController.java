@@ -24,7 +24,7 @@ import pojo.StudentPojo;
  *
  * @author Adair Hernández
  */
-public class StudentOverviewController implements Initializable {
+public class StudentOverviewController extends ProfessorDashboardController implements Initializable {
 
     @FXML
     private TableView<StudentPojo> studentsTableView;

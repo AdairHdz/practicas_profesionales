@@ -32,14 +32,14 @@ public class DashboardController implements Initializable{
     }
     
     public void goToUploadProgressReport() throws IOException{
-        System.out.println("Hola");
+        
         Parent root = FXMLLoader.load(getClass().getResource("/views/UploadProgressReport.fxml"));
         Stage stage = (Stage) goToUploadProgressReportButton.getScene().getWindow();
         stage.setScene(new Scene(root, 768, 510));
     }
     
     public void goToStudentProgress() throws IOException{
-        System.out.println("Adiós");
+        
         Parent root = FXMLLoader.load(getClass().getResource("/views/StudentProgress.fxml"));
         Stage stage = (Stage) goToStudentProgressButton.getScene().getWindow();
         stage.setScene(new Scene(root, 768, 510));

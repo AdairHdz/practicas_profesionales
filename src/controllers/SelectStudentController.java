@@ -5,9 +5,12 @@
  */
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +25,7 @@ import pojo.StudentPojo;
 
 
 
-public class SelectStudentController extends DashboardController implements Initializable {
+public class SelectStudentController extends ProfessorDashboardController implements Initializable {
     @FXML
     private ComboBox comboStudentsNames;
     @FXML
@@ -52,5 +55,16 @@ public class SelectStudentController extends DashboardController implements Init
             names.add(ol.get(i).getName());
         }
         return names;
+    }
+    
+    public void checkStudentProgress(){
+        try {
+            System.out.println(comboStudentsNames.getValue());
+            StudentProgressController spc = new StudentProgressController("S18012122");
+            super.redirectToCheckProgressScreen();
+        } catch (IOException ex) {
+            
+        }
+        
     }
 }

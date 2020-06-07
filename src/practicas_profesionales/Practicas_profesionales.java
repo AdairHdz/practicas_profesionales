@@ -7,6 +7,7 @@ package practicas_profesionales;
 
 
 import exceptions.NoFileChosenException;
+import file.DocReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Student;
+import pojo.DocumentPojo;
 import pojo.StudentPojo;
 
 
@@ -26,12 +28,10 @@ public class Practicas_profesionales extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-
+        DocReader d = new DocReader(new DocumentPojo());
+        d.task();
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
-
-        
-        Scene scene = new Scene(root);
-        
+        Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
     }

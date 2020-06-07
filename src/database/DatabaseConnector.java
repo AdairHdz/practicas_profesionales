@@ -23,7 +23,10 @@ public class DatabaseConnector {
         this.password = "";
     }
 
-    
+    /**
+     * 
+     * @return 
+     */
     public static Connection getConnection(){
         Connection connection = null;        
         try{

@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
     }
 
     private void redirectToAssignProjectScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/AssignProject.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/ProjectOverview.fxml"));
         Stage stage = (Stage) emailTextField.getScene().getWindow();
         stage.setScene(new Scene(root, 800, 510));
     }
