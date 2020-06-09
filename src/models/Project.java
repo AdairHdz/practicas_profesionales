@@ -22,8 +22,9 @@ public class Project {
     public ArrayList<ProjectPojo> getProjects(){
         ArrayList<ProjectPojo> projectsList = new ArrayList<>();
             DatabaseConnector dc = new DatabaseConnector();            
-            Connection connection = dc.getConnection();
+            
         try{
+            Connection connection = dc.getConnection();
             Statement query = connection.createStatement();
             ResultSet rs = query.executeQuery("SELECT Proyecto.nombre,"
                     + " Proyecto.numeroEstudiantesSolicitados,"

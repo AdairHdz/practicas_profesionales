@@ -31,24 +31,18 @@ public class DatabaseConnector {
      * retorna la existente.
      * @return una única instancia del objeto Connection.
      */
-    public Connection getConnection() {
-        if (uniqueInstance == null) {
-            try {
-                this.handleGetconnection();
-            } catch (SQLException e) {
+    public Connection getConnection(){
+        if (this.uniqueInstance == null) {
+            try{
+                this.uniqueInstance = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistemapp?user=root&password=");
+            }catch(SQLException e){
                 System.out.println(e.getMessage());
             }
+            
         }
         return uniqueInstance;
     }
 
-    /**
-     * Inicializa el objeto Connection.
-     * @throws SQLException 
-     */
-    private void handleGetconnection() throws SQLException {
-        uniqueInstance = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistemapp?user=root&password=");
-    }
 
     /**
      * Cierra la conexión con la base de datos y asigna null al objeto
@@ -59,7 +53,7 @@ public class DatabaseConnector {
             this.uniqueInstance.close();
             this.uniqueInstance = null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

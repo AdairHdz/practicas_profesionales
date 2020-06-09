@@ -23,9 +23,10 @@ public class Selection {
 
     public ArrayList<SelectionPojo> getStudentSelections(int userId){
                     DatabaseConnector dc = new DatabaseConnector();            
-            Connection connection = dc.getConnection();
+            
         ArrayList<SelectionPojo> studentSelections = new ArrayList<>();
         try{
+            Connection connection = dc.getConnection();
             Statement st = connection.createStatement();
             ResultSet resultSet = st.executeQuery("SELECT Eleccion.nivelEleccion,"
                     + " Proyecto.nombre, Organizacion_vinculada.nombre AS nombreOV,"
@@ -60,9 +61,10 @@ public class Selection {
     
     public void saveSelections(ArrayList<SelectionPojo> selections) {
                     DatabaseConnector dc = new DatabaseConnector();            
-            Connection connection = dc.getConnection();
+            
         
         try {
+            Connection connection = dc.getConnection();
             connection.setAutoCommit(false);
             Statement statement = connection.createStatement();
             int selectionsSaved = 0;

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import mappers.ReportMapper;
 
 import pojo.ReportPojo;
+import utils.DateFormatter;
 
 /**
  *
@@ -48,38 +49,34 @@ public class Report {
         }
     }
 
-    public boolean saveReport(ReportPojo report) throws SQLException {
+    public boolean saveReport(ReportPojo report, int recordId) throws SQLException {
 
         //Documento
         String fileName = report.getName();
         double fileSize = report.getSize();
         String filePath = report.getPath();
-        int recordId = 1;
 
         //Reporte
         String fileStatus = report.getStatus();
-        java.sql.Date sqlInitialDateOfReport = new java.sql.Date(report.getInitialDate().getTime());
-        java.sql.Date sqlEndingDateOfReport = new java.sql.Date(report.getEndingDate().getTime());
+
+        DateFormatter dateFormatter = new DateFormatter();
+        java.sql.Date sqlInitialDateOfReport = dateFormatter.getSqlDate(report.getInitialDate());
+        java.sql.Date sqlEndingDateOfReport = dateFormatter.getSqlDate(report.getEndingDate());
+
         int coveredHours = report.getCoveredHours();
 
         DatabaseConnector dc = new DatabaseConnector();
         Connection connection = dc.getConnection();
-        try {
-            connection.setAutoCommit(false);
-            Statement documentInsertionQuery = connection.createStatement();
-            boolean documentInserted = documentInsertionQuery.execute("INSERT INTO Documento VALUES(NULL, '"
-                    + fileName + "', " + fileSize + ", '" + filePath + "', CURDATE(), " + recordId + ");");
-            Statement reportInsertionQuery = connection.createStatement();
-            boolean reportInserted = reportInsertionQuery.execute("INSERT INTO "
-                    + "Reporte VALUES(LAST_INSERT_ID(), 'Aprobado', "
-                    + "'" + sqlInitialDateOfReport + "'" + ", '" + sqlEndingDateOfReport + "', " + coveredHours + ");");
-            connection.commit();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            connection.rollback();
-        } finally {
-            connection.close();
-        }
+        connection.setAutoCommit(false);
+        Statement documentInsertionQuery = connection.createStatement();
+        boolean documentInserted = documentInsertionQuery.execute("INSERT INTO Documento VALUES(NULL, '"
+                + fileName + "', " + fileSize + ", '" + filePath + "', CURDATE(), " + recordId + ");");
+        Statement reportInsertionQuery = connection.createStatement();
+        boolean reportInserted = reportInsertionQuery.execute("INSERT INTO "
+                + "Reporte VALUES(LAST_INSERT_ID(), 'Aprobado', "
+                + "'" + sqlInitialDateOfReport + "'" + ", '" + sqlEndingDateOfReport + "', " + coveredHours + ");");
+        connection.commit();
+        connection.close();
         return true;
     }
 }

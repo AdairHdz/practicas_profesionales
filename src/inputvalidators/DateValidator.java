@@ -17,32 +17,17 @@ import java.util.Date;
  */
 public class DateValidator {
 
-    private DateTimeFormatter dateTimeFormatter;
-    private SimpleDateFormat sdformat;
-    
-    public DateValidator(){
-        this.dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.sdformat = new SimpleDateFormat("yyyy-MM-dd");
-    }
-    
-    public boolean validateStartingAndEndingDate(LocalDate startingDate, LocalDate endingDate) {
-        boolean validDates = false;        
-        try{
-            validDates = this.handleStartingAndEndingDateValidation(startingDate, endingDate);
-        }catch(ParseException | NullPointerException e){
-            System.out.println(e.getMessage());
-        }
-        return validDates;
-    }
-
-    private boolean handleStartingAndEndingDateValidation(LocalDate startingDate, LocalDate endingDate) throws ParseException, NullPointerException {        
-        if(startingDate == null || endingDate == null){
+    public boolean validateStartingAndEndingDate(LocalDate startingDate,
+            LocalDate endingDate) throws ParseException, NullPointerException {
+        if (startingDate == null || endingDate == null) {
             throw new NullPointerException("Null Date value");
         }
-        
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
         String startingDateString = startingDate.format(dateTimeFormatter);
         String endingDateString = endingDate.format(dateTimeFormatter);
-        
+
         Date d = sdformat.parse(startingDateString);
         Date d2 = sdformat.parse(endingDateString);
 

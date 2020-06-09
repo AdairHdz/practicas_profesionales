@@ -22,10 +22,10 @@ public class Student {
     }
 
     public ArrayList<StudentPojo> getStudents() {
-        DatabaseConnector dc = new DatabaseConnector();
-        Connection connection = dc.getConnection();
+        DatabaseConnector dc = new DatabaseConnector();        
         ArrayList<StudentPojo> studentsList = new ArrayList<>();
         try {
+            Connection connection = dc.getConnection();
             Statement query = connection.createStatement();
             ResultSet rs = query.executeQuery("SELECT Usuario.nombres,"
                     + " Usuario.apellidos, Usuario.idUsuario, Estudiante.matricula"

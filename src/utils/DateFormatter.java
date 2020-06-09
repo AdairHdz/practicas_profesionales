@@ -28,4 +28,9 @@ public class DateFormatter {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
+    public java.sql.Date getSqlDate(Date date){
+        long time = date.getTime();
+        return new java.sql.Date(time);
+    }
+    
 }

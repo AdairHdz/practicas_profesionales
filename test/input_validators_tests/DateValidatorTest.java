@@ -6,7 +6,6 @@
 package input_validators_tests;
 
 import inputvalidators.DateValidator;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;

@@ -16,23 +16,15 @@ import pojo.StudentPojo;
  */
 public class StudentMapper {
 
-    public ArrayList<StudentPojo> mapAll(ResultSet rs) {
-        ArrayList<StudentPojo> studentsList = new ArrayList<>();
-        try {
-            studentsList = this.handleMappingAll(rs);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    public ArrayList<StudentPojo> mapAll(ResultSet rs) throws SQLException{
+        ArrayList<StudentPojo> studentsList;
+        studentsList = this.handleMappingAll(rs);
         return studentsList;
     }
     
-    public StudentPojo map(ResultSet rs){
-        StudentPojo student = new StudentPojo();
-        try{
-            student = this.handleMapping(rs);
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+    public StudentPojo map(ResultSet rs) throws SQLException{
+        StudentPojo student;
+        student = this.handleMapping(rs);
         return student;
     }
 

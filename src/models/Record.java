@@ -20,9 +20,10 @@ public class Record {
     
     public RecordPojo getRecord(int userId){
             DatabaseConnector dc = new DatabaseConnector();            
-            Connection connection = dc.getConnection();
+            
         RecordPojo record = null;
         try{
+            Connection connection = dc.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT calificacionFinal,"
                     + "comentarios, totalHorasRealizadas "

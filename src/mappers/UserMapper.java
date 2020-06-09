@@ -16,7 +16,7 @@ import pojo.UserPojo;
 public class UserMapper {
     
     public UserPojo map(ResultSet rs){
-        UserPojo user = new UserPojo();
+        UserPojo user = null;
         try{
             user = this.handleMapping(rs);
         }catch(SQLException e){
@@ -26,8 +26,9 @@ public class UserMapper {
     }
 
     private UserPojo handleMapping(ResultSet rs) throws SQLException {
-        UserPojo user = new UserPojo();
+        UserPojo user = null;
         while (rs.next()) {
+            user = new UserPojo();
             user.setUserId(rs.getInt("idUsuario"));
             user.setName(rs.getString("nombres"));
             user.setLastName(rs.getString("apellidos"));
