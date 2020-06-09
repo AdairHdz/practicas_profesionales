@@ -16,32 +16,7 @@ import pojo.StudentPojo;
  */
 public class StudentMapper {
 
-    public ArrayList<StudentPojo> mapAll(ResultSet rs) throws SQLException{
-        ArrayList<StudentPojo> studentsList;
-        studentsList = this.handleMappingAll(rs);
-        return studentsList;
-    }
-    
-    public StudentPojo map(ResultSet rs) throws SQLException{
-        StudentPojo student;
-        student = this.handleMapping(rs);
-        return student;
-    }
-
-    private StudentPojo handleMapping(ResultSet rs) throws SQLException {
-        StudentPojo student = new StudentPojo();
-        while (rs.next()) {
-            student.setName(rs.getString("nombres"));
-            student.setLastName(rs.getString("apellidos"));
-            student.setEmail(rs.getString("correo"));
-            student.setPassword(rs.getString("contasenia"));
-            student.setEnrollment(rs.getString("matricula"));
-            student.setPhone(rs.getString("telefono"));
-        }
-        return student;
-    }
-
-    private ArrayList<StudentPojo> handleMappingAll(ResultSet rs) throws SQLException {
+    public ArrayList<StudentPojo> mapAll(ResultSet rs) throws SQLException {
         ArrayList<StudentPojo> studentsList = new ArrayList<>();
         while (rs.next()) {
             StudentPojo student = new StudentPojo();
@@ -52,5 +27,18 @@ public class StudentMapper {
             studentsList.add(student);
         }
         return studentsList;
+    }
+
+    public StudentPojo map(ResultSet rs) throws SQLException {
+        StudentPojo student = new StudentPojo();
+        while (rs.next()) {
+            student.setName(rs.getString("nombres"));
+            student.setLastName(rs.getString("apellidos"));
+            student.setEmail(rs.getString("correo"));
+            student.setPassword(rs.getString("contasenia"));
+            student.setEnrollment(rs.getString("matricula"));
+            student.setPhone(rs.getString("telefono"));
+        }
+        return student;
     }
 }

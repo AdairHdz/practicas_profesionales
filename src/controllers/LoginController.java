@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import models.User;
 import pojo.UserPojo;
 import session.UserSession;
+import utils.FXRouter;
 
 /**
  *
@@ -60,7 +61,6 @@ public class LoginController implements Initializable {
 
     }
 
-
     /**
      * Este método evalúa el tipo de usuario que inició sesión en el sistema y
      * dependiendo de eso lo redirige a otra pantalla. Si el usuario es de tipo
@@ -73,37 +73,14 @@ public class LoginController implements Initializable {
     private void redirectUser(String userType) {
         try {
             if (userType.equals("estudiante")) {
-                redirectToUploadProgressReportScreen();
+                FXRouter.goTo("uploadProgressReport");
             } else {
-                redirectToAssignProjectScreen();
+                FXRouter.goTo("studentOverview");
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-    }
-
-    /**
-     * Este método redirige al usuario a la pantalla de subir reporte de
-     * progreso
-     *
-     * @throws IOException
-     */
-    private void redirectToUploadProgressReportScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/UploadProgressReport.fxml"));
-        Stage stage = (Stage) emailTextField.getScene().getWindow();
-        stage.setScene(new Scene(root, 800, 510));
-    }
-
-    /**
-     * Este método redirige al usuario a la pantalla de asignar proyecto.
-     *
-     * @throws IOException
-     */
-    private void redirectToAssignProjectScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/StudentOverview.fxml"));
-        Stage stage = (Stage) emailTextField.getScene().getWindow();
-        stage.setScene(new Scene(root, 800, 510));
     }
 
 }

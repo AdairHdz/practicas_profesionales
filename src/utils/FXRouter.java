@@ -217,8 +217,9 @@ public final class FXRouter {
         currentRoute = route;
         
         // create correct file path.  "/" doesn't affect any OS
-        String scenePath = "/" + pathRef + "/" + route.scenePath;
+        String scenePath = route.scenePath;
         System.out.println(scenePath);
+        
         // load .fxml resource
         Parent resource = FXMLLoader.load(new Object() { }.getClass().getResource(scenePath));
 

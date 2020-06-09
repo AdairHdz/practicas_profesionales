@@ -14,18 +14,8 @@ import pojo.UserPojo;
  * @author Adair Hernández
  */
 public class UserMapper {
-    
-    public UserPojo map(ResultSet rs){
-        UserPojo user = null;
-        try{
-            user = this.handleMapping(rs);
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return user;
-    }
 
-    private UserPojo handleMapping(ResultSet rs) throws SQLException {
+    public UserPojo map(ResultSet rs) throws SQLException{
         UserPojo user = null;
         while (rs.next()) {
             user = new UserPojo();

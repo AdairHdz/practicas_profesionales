@@ -9,25 +9,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
-import models.Report;
 import models.Student;
-import pojo.ReportPojo;
 import pojo.StudentPojo;
+import utils.FXRouter;
 
 /**
  *
@@ -60,8 +53,7 @@ public class StudentOverviewController extends ProfessorDashboardController impl
                     StudentPojo clickedRow = row.getItem();
                     int selectedStudentId = clickedRow.getUserId();
                     try {
-                        ProjectOverviewController poc = new ProjectOverviewController(2);
-                        this.redirectToProjectOverviewScreen();
+                        FXRouter.goTo("projectOverview", selectedStudentId);
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
@@ -94,10 +86,5 @@ public class StudentOverviewController extends ProfessorDashboardController impl
         return studentsObservableList;
     }
 
-    public void redirectToProjectOverviewScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/ProjectOverview.fxml"));
-        Stage stage = (Stage) studentsTableView.getScene().getWindow();
-        stage.setScene(new Scene(root, 800, 510));
-    }
 
 }

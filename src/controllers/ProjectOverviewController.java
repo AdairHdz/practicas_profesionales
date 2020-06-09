@@ -8,7 +8,10 @@ package controllers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +32,7 @@ import pojo.LinkedOrganizationPojo;
 import pojo.ProjectPojo;
 import pojo.SelectionPojo;
 import pojo.StudentPojo;
+import utils.FXRouter;
 
 /**
  *
@@ -46,23 +50,12 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
     @FXML
     private TableColumn<SelectionPojo, String> projectNameTableColumn;
     @FXML
-    private TableColumn<SelectionPojo, LinkedOrganizationPojo> linkedOrganizationTableColumn;
+    private TableColumn<SelectionPojo, String> linkedOrganizationTableColumn;
     @FXML
-    private TableColumn<SelectionPojo, Integer> assignedStudentsTableColumn;
+    private TableColumn<SelectionPojo, String> assignedStudentsTableColumn;
     @FXML
-    private TableColumn<SelectionPojo, Integer> requiredStudentsTableColumn;
+    private TableColumn<SelectionPojo, String> requiredStudentsTableColumn;
 
-    
-
-    private int studentId;
-    
-    public ProjectOverviewController(){
-        
-    }
-    
-    public ProjectOverviewController(int studentId){
-        this.studentId = studentId;
-    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,22 +85,30 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
 
     private void initCols() {
         positionTableColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
-        //projectNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        
+        projectNameTableColumn.setCellValueFactory(cellDataFeatures -> 
+                new SimpleStringProperty(cellDataFeatures.getValue().
+                        getProject().getName()));                                                
        
 
         
 
-        //linkedOrganizationTableColumn.setCellValueFactory(new PropertyValueFactory<>("enrollment"));
-        //linkedOrganizationTableColumn.setCellValueFactory(new PropertyValueFactory<>("linkedOrganization"));
-        //assignedStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("assignedStudents"));
-        //requiredStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("requiredStudents"));
+        assignedStudentsTableColumn.setCellValueFactory(cellDataFeatures -> 
+            new SimpleStringProperty(cellDataFeatures.getValue().getProject().getAssignedStudents()+""));
+        
+        linkedOrganizationTableColumn.setCellValueFactory(cellDataFeatures -> 
+            new SimpleStringProperty(cellDataFeatures.getValue().getProject().getLinkedOrganization().getName()));
+        
+        requiredStudentsTableColumn.setCellValueFactory(cellDataFeatures -> 
+            new SimpleStringProperty(cellDataFeatures.getValue().getProject().getRequiredStudents()+""));
     }
 
     public ObservableList<SelectionPojo> loadData() {
-        System.out.println(this.studentId);
+        int selectedStudentId = (int) FXRouter.getData();
+        System.out.println(selectedStudentId);
         Selection selection = new Selection();
 
-        ArrayList<SelectionPojo> selectionsList = selection.getStudentSelections(this.studentId);
+        ArrayList<SelectionPojo> selectionsList = selection.getStudentSelections(selectedStudentId);
         ObservableList<SelectionPojo> selectionsObservableList = FXCollections.observableArrayList(selectionsList);
         return selectionsObservableList;
     }
