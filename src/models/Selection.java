@@ -22,7 +22,8 @@ import pojo.SelectionPojo;
 public class Selection {
 
     public ArrayList<SelectionPojo> getStudentSelections(int userId){
-        Connection connection = DatabaseConnector.getConnection();
+                    DatabaseConnector dc = new DatabaseConnector();            
+            Connection connection = dc.getConnection();
         ArrayList<SelectionPojo> studentSelections = new ArrayList<>();
         try{
             Statement st = connection.createStatement();
@@ -58,7 +59,8 @@ public class Selection {
     }
     
     public void saveSelections(ArrayList<SelectionPojo> selections) {
-        Connection connection = DatabaseConnector.getConnection();
+                    DatabaseConnector dc = new DatabaseConnector();            
+            Connection connection = dc.getConnection();
         
         try {
             connection.setAutoCommit(false);

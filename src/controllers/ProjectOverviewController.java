@@ -42,7 +42,7 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
     @FXML
     private Button saveButton;
     @FXML
-    private TableColumn<Integer, String> optionProjectTableColumn;
+    private TableColumn<SelectionPojo, Integer> positionTableColumn;
     @FXML
     private TableColumn<SelectionPojo, String> projectNameTableColumn;
     @FXML
@@ -52,8 +52,18 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
     @FXML
     private TableColumn<SelectionPojo, Integer> requiredStudentsTableColumn;
 
-    private ArrayList<SelectionPojo> selectedProjects = new ArrayList<>(3);
+    
 
+    private int studentId;
+    
+    public ProjectOverviewController(){
+        
+    }
+    
+    public ProjectOverviewController(int studentId){
+        this.studentId = studentId;
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTable();
@@ -72,8 +82,7 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
     }
 
     public void saveButtonClicked() {
-        Selection selection = new Selection();
-        selection.saveSelections(selectedProjects);
+        
     }
 
     private void initTable() {
@@ -82,33 +91,27 @@ public class ProjectOverviewController extends ProfessorDashboardController impl
     }
 
     private void initCols() {
-        //optionProjectTableColumn.setCellValueFactory(new PropertyValueFactory<>("option"));
-        projectNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        positionTableColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+        //projectNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+       
 
         
 
         //linkedOrganizationTableColumn.setCellValueFactory(new PropertyValueFactory<>("enrollment"));
         //linkedOrganizationTableColumn.setCellValueFactory(new PropertyValueFactory<>("linkedOrganization"));
-        assignedStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("assignedStudents"));
-        requiredStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("requiredStudents"));
+        //assignedStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("assignedStudents"));
+        //requiredStudentsTableColumn.setCellValueFactory(new PropertyValueFactory("requiredStudents"));
     }
 
     public ObservableList<SelectionPojo> loadData() {
+        System.out.println(this.studentId);
         Selection selection = new Selection();
 
-        ArrayList<SelectionPojo> selectionsList = selection.getStudentSelections(1);
+        ArrayList<SelectionPojo> selectionsList = selection.getStudentSelections(this.studentId);
         ObservableList<SelectionPojo> selectionsObservableList = FXCollections.observableArrayList(selectionsList);
         return selectionsObservableList;
     }
 
-    public void addChoice(ProjectPojo selectedProject) {
-        if (selectedProjects.size() < 3) {
-            SelectionPojo sp = new SelectionPojo();
-            sp.setProject(selectedProject);
-            System.out.println(sp.getProject().getName());
-            sp.setPosition(selectedProjects.size() + 1);
-            selectedProjects.add(sp);
-        }
-    }
+
 
 }

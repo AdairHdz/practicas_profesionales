@@ -10,9 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import pojo.CoordinatorPojo;
-import pojo.ProfessorPojo;
-import pojo.StudentPojo;
+import mappers.UserMapper;
+
 import pojo.UserPojo;
 
 /**
@@ -20,27 +19,27 @@ import pojo.UserPojo;
  * @author Adair Hernández
  */
 public class User {
-    
-    public UserPojo getUser(String email, String password){
-        Connection connection = DatabaseConnector.getConnection();
-        UserPojo user = new UserPojo();
-        try{
-            Statement query = connection.createStatement();
-            ResultSet resultSet = query.executeQuery("SELECT idUsuario, nombres, apellidos, correo, tipo"
-                    + " FROM Usuario WHERE correo = '" + email
-                    + "' AND contrasenia = '" + password + "';");
-            while(resultSet.next()){
-                user.setUserId(resultSet.getInt("idUsuario"));
-                user.setName(resultSet.getString("nombres"));
-                user.setLastName(resultSet.getString("apellidos"));
-                user.setEmail(resultSet.getString("correo"));
-                user.setType(resultSet.getString("tipo"));
-            }
-            
-        }catch(SQLException e){
-            
-        }        
+
+    public UserPojo getUser(String email, String password) {
+        UserPojo user = null;
+        try {
+            user = this.handleGetUser(email, password);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return user;
     }
-    
+
+    private UserPojo handleGetUser(String email, String password) throws SQLException{
+        DatabaseConnector dc = new DatabaseConnector();
+        Connection connection = dc.getConnection();
+        Statement query = connection.createStatement();
+        ResultSet resultSet = query.executeQuery("SELECT idUsuario, nombres, apellidos, correo, tipo"
+                + " FROM Usuario WHERE correo = '" + email
+                + "' AND contrasenia = '" + password + "';");
+        UserMapper um = new UserMapper();
+        UserPojo user = um.map(resultSet);
+        return user;
+    }
+
 }

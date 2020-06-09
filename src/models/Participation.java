@@ -20,7 +20,8 @@ public class Participation {
     public ParticipationPojo getParticipation(String studentEnrollment){
        ParticipationPojo participation = null;
         try{
-            Connection connection = DatabaseConnector.getConnection();
+            DatabaseConnector dc = new DatabaseConnector();            
+            Connection connection = dc.getConnection();
             Statement query = connection.createStatement();
             ResultSet result = query.executeQuery("SELECT Proyecto.nombre,"
                     + " Organizacion_vinculada.nombre AS OVname,"
@@ -34,7 +35,7 @@ public class Participation {
                     + " INNER JOIN Organizacion_vinculada ON"
                     + " Proyecto.idOV = Organizacion_vinculada.idOV"
                     + " WHERE Estudiante.matricula = 'S18012122';");
-            DatabaseConnector.closeConnection(connection);
+            dc.closeConnection();
             ProjectPojo project = new ProjectPojo();
             StudentPojo student = new StudentPojo();
             LinkedOrganizationPojo organization = new LinkedOrganizationPojo();

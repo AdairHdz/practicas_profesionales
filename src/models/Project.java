@@ -21,7 +21,8 @@ import pojo.ProjectPojo;
 public class Project {
     public ArrayList<ProjectPojo> getProjects(){
         ArrayList<ProjectPojo> projectsList = new ArrayList<>();
-        Connection connection = DatabaseConnector.getConnection();
+            DatabaseConnector dc = new DatabaseConnector();            
+            Connection connection = dc.getConnection();
         try{
             Statement query = connection.createStatement();
             ResultSet rs = query.executeQuery("SELECT Proyecto.nombre,"

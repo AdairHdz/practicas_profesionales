@@ -19,7 +19,8 @@ import pojo.RecordPojo;
 public class Record {
     
     public RecordPojo getRecord(int userId){
-        Connection connection = DatabaseConnector.getConnection();
+            DatabaseConnector dc = new DatabaseConnector();            
+            Connection connection = dc.getConnection();
         RecordPojo record = null;
         try{
             Statement statement = connection.createStatement();

@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
 
         try {
             if(myUser.getType().equals("estudiante")){
-                System.out.println("HOLAAA");
+                
                 redirectToUploadProgressReportScreen();
             }else{
                 redirectToAssignProjectScreen();
@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
     }
 
     private void redirectToAssignProjectScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/ProjectOverview.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/StudentOverview.fxml"));
         Stage stage = (Stage) emailTextField.getScene().getWindow();
         stage.setScene(new Scene(root, 800, 510));
     }

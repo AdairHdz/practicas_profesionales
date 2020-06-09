@@ -27,11 +27,11 @@ public class DocxWriter implements DocumentWriter {
     }
 
     @Override
-    public boolean write() {
+    public boolean write(){
         try {
             writeDocumentParagraphs(document);
         } catch (FileNotFoundException ex) {
-
+            
         } catch (IOException ex) {
 
         }

@@ -34,7 +34,7 @@ public class DashboardController implements Initializable{
     public void goToUploadProgressReport() throws IOException{
         
         Parent root = FXMLLoader.load(getClass().getResource("/views/UploadProgressReport.fxml"));
-        Stage stage = (Stage) goToUploadProgressReportButton.getScene().getWindow();
+        Stage stage = (Stage) goToUploadProgressReportButton.getScene().getWindow();        
         stage.setScene(new Scene(root, 768, 510));
     }
     

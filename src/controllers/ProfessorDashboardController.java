@@ -26,7 +26,7 @@ public class ProfessorDashboardController {
     private Button checkProgressButton;
 
     public void redirectToAssignProjectScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/ProjectOverview.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/StudentOverview.fxml"));
         Stage stage = (Stage) assignProjectButton.getScene().getWindow();
         stage.setScene(new Scene(root, 800, 510));
     }

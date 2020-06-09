@@ -12,63 +12,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import mappers.StudentMapper;
 import pojo.StudentPojo;
 
+public class Student {
 
-public class Student {    
-    
-    public Student(){
-        
+    public Student() {
+
     }
-    
-        public ArrayList<StudentPojo> getStudents(){
-        Connection connection = DatabaseConnector.getConnection();
+
+    public ArrayList<StudentPojo> getStudents() {
+        DatabaseConnector dc = new DatabaseConnector();
+        Connection connection = dc.getConnection();
         ArrayList<StudentPojo> studentsList = new ArrayList<>();
-        try{
+        try {
             Statement query = connection.createStatement();
             ResultSet rs = query.executeQuery("SELECT Usuario.nombres,"
-                    + " Usuario.apellidos, Estudiante.matricula"
+                    + " Usuario.apellidos, Usuario.idUsuario, Estudiante.matricula"
                     + " FROM Estudiante INNER JOIN Usuario ON "
                     + "Estudiante.idUsuario = Usuario.idUsuario");
-            while(rs.next()){
-                StudentPojo student = new StudentPojo();
-                student.setName(rs.getString("nombres"));
-                student.setLastName(rs.getString("apellidos"));
-                student.setEnrollment(rs.getString("matricula"));
-                studentsList.add(student);
-            }
-        }catch(SQLException e){
+            StudentMapper sm = new StudentMapper();
+            studentsList = sm.mapAll(rs);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }                
+        }
         return studentsList;
     }
-    
-    public StudentPojo getOnlyOneStudent(String enrollment){
-         try{
-            Connection conn =  DatabaseConnector.getConnection();
-            Statement query = conn.createStatement();
+
+    public StudentPojo getOnlyOneStudent(String enrollment) {
+        try {
+            DatabaseConnector dc = new DatabaseConnector();
+            Connection connection = dc.getConnection();
+            Statement query = connection.createStatement();
             ResultSet result = query.executeQuery("SELECT usuario.nombres, usuario.apellidos, usuario.correo, "
                     + "usuario.contasenia, estudiante.matricula, estudiante.telefono "
                     + "FROM usuario inner join estudiante on usuario.idUsuario = estudiante.idUsuario "
-                    + "WHERE estudiante.matricula = '"+enrollment+"';");
-            DatabaseConnector.closeConnection(conn);
-            StudentPojo student = new StudentPojo();
-            while(result.next()){
-
-                student.setName(result.getString("nombres"));
-                student.setLastName(result.getString("apellidos"));
-                student.setEmail(result.getString("correo"));
-                student.setPassword(result.getString("contasenia"));
-                student.setEnrollment(result.getString("matricula"));
-                student.setPhone(result.getString("telefono"));
-            }
+                    + "WHERE estudiante.matricula = '" + enrollment + "';");
+            dc.closeConnection();
+            StudentMapper sm = new StudentMapper();
+            StudentPojo student = sm.map(result);
             return student;
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
-        }   
+        }
     }
 }
-
-

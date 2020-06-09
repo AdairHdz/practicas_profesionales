@@ -12,7 +12,7 @@ package file;
 public class DocWriter implements DocumentWriter{
 
     @Override
-    public boolean write() {
+    public boolean write(){
         return false;
     }
     

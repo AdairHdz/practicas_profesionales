@@ -62,7 +62,7 @@
       </Label>
       <TableView fx:id="projectsTableView" prefHeight="356.0" prefWidth="348.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4">
         <columns>
-          <TableColumn fx:id="optionTableColumn" prefWidth="59.0" text="Opción" />
+          <TableColumn fx:id="positionTableColumn" prefWidth="59.0" text="Opción" />
           <TableColumn fx:id="projectNameTableColumn" prefWidth="149.0" text="Proyecto" />
             <TableColumn fx:id="linkedOrganizationTableColumn" prefWidth="128.0" text="Org. vinculada" />
             <TableColumn fx:id="assignedStudentsTableColumn" minWidth="0.0" prefWidth="90.0" text="Est. asignados" />
